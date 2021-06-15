@@ -1,0 +1,24 @@
+{
+  "name": "async-error-handler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezeilo-su/node-async-error-handler.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ezeilo-su/node-async-error-handler/issues"
+  },
+  "homepage": "https://github.com/ezeilo-su/node-async-error-handler#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.13"
+  }
+}
