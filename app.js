@@ -1,6 +1,6 @@
 const express = require('express');
 const AppError = require('./utils/appError');
-const globalErrorHandler = require('./controllers/errorController');
+const globalErrorHandler = require('./middleware/globalErrorHandler');
 
 const app = express();
 
@@ -10,10 +10,12 @@ app.use(express.json());
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
+
+// The last middlewares in the middleware stack:
 // To handle all error due to undefined routes
-// The last middleware in the middleware stack
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
+// Global error handler middleware
 app.use(globalErrorHandler);
