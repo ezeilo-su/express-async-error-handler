@@ -40,7 +40,7 @@ const sendErrorProd = (err, res) => {
     console.error('ERROR: ', err);
     res.status(500).json({
       status: 'error',
-      message: 'Something went wrong!'
+      message: 'Something broke!'
     })
   }
 };
@@ -56,10 +56,16 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, res);
 
   } else if(process.env.NODE_ENV === 'production') {
+    
     let error = { ...err };
+
     if (err.name === 'CastError') error = handleCastErrorDB(error);
-    if (err.code === 11000) error = handleDuplicateFieldDB(error);
-    if (err.name === 'ValidatorError') error = handleValidatorErrorDB(error);
+
+    if (err.name === 'MongoError' && err.code === 11000)
+      error = handleDuplicateFieldDB(error);
+
+    if (err.name === 'ValidatorError')
+      error = handleValidatorErrorDB(error);
 
     sendErrorProd(error, res);
   }

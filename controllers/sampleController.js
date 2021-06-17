@@ -9,7 +9,7 @@ const getAllUsers = catchAsync(async (req, res, next) => {
 
 const getUser = catchAsync(async (req, res, next) => {
   // request handling goes here!!!
-  const user = awail User.findById(req.params.id);
+  const user = await User.findById(req.params.id);
 
   // Implement 404 (Not found) error response
   if(!user) {
@@ -20,6 +20,19 @@ const getUser = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       user
+    }
+  })
+});
+
+const getUser = catchAsync(async (req, res, next) => {
+  // request handling goes here!!!
+  const users = await User.find({});
+
+  res.status(200).json({
+    status: 'success',
+    results: users.length,
+    data: {
+      users
     }
   })
 });
